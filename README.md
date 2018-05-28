@@ -15,3 +15,6 @@ HEALTH BAR GAME (Name in Progress)
 I decided to create a game that is based off on that scene in various Metal Gear games where Snake gets tortued, and the player must mash a button to keep his health bar up while his health bar drains. It's not the most super impressive game over, but hey it's simple.
 When I created my first few games back in my Game Dev class, I realized how much I go inbetween implementing certain mechanics in them.
 For example, the Sneaking Game I made had a lot of focus on the GUARD AI and not much else. I decided to see what I can do if I focus on ONE Mechanic on the game, which is this Health Bar going down and getting refilled.
+
+So far, I have the health bar working. It has 2 important functions: DealDamage and RestoreHealth, both which work as expected.
+Now, however, I need to find a way to make DealDamage work based on time rather than button input. This should be easy, I can probably just use what I used in the past (urgh i forgot the name of it though) to get it to work.
