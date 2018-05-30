@@ -18,3 +18,17 @@ For example, the Sneaking Game I made had a lot of focus on the GUARD AI and not
 
 So far, I have the health bar working. It has 2 important functions: DealDamage and RestoreHealth, both which work as expected.
 Now, however, I need to find a way to make DealDamage work based on time rather than button input. This should be easy, I can probably just use what I used in the past (urgh i forgot the name of it though) to get it to work.
+
+
+5/29/18
+
+This probably isn't really the best way to track my progress, most likely? lol i dont really know. I might as well commit to this.
+After a busy day, I started working on making sure that the dealdamage function worked on a timer. I could have used a coroutine, but I felt as though the time to learn the code would be too much for me, so I stuck with using a simple float that counts down as a Timer.
+It works as expected. Actually, the DealDamage function used to do 1 dmg per frame, but that drained the bar down so fast. Right now, I put it at a small 0.1f to make it more reasonable. 
+
+Testing it out gave me flashbacks to the tortue scenes alright. God darn, where those annoying sometimes, but oddly funish? Who knows.
+
+Things I really need to do: 1) Code that makes dealing damage stop after a while 2)another deal damage function(?) that increases damage done 3) and then code runs that function.
+
+I THINK what I can do is just make each difficulty level a new scene. Saves me time, I reckon.
+
