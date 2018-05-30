@@ -2,19 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 
 public class playerHealth : MonoBehaviour {
+    /// <summary>
+    /// Set Up Variables
+    /// </summary>
     public float currentHealth { get; set; }
     public float maxHealth { get; set; }
+    public Text healthBarText;
+    public Animator animator;
+    private string levelToLoad;
 
+    /// <summary>
+    /// In Game used Variables
+    /// </summary>
     public Slider healthBar;
 
-    public float timer = 5;
-
+    public float timer = 10;
+    public float damageTimer = 30;
+    public bool shouldHeal = false;
+     
 	void Start ()
     {
         //can be any value of course
-        maxHealth = 20f;
+        maxHealth = 100f;
 
         //Rest the health bar to full on game load
         currentHealth = maxHealth;
@@ -22,6 +35,7 @@ public class playerHealth : MonoBehaviour {
         //Get the value of the slider 
         //set it to calculate health
         healthBar.value = CalculateHealth();
+        healthBarText.text = "Health: " + currentHealth;
         Debug.Log("Start");
 
 	}
@@ -30,16 +44,29 @@ public class playerHealth : MonoBehaviour {
 	void Update ()
     {
 
-        timer -= 0.5f;
+        timer -= 1 * Time.deltaTime;
+        healthBarText.text = "Health: " + Mathf.Round(currentHealth);
 
-		if (timer <= 0)
+        if (timer <= 0)
         {
-            DealDamage(0.1f);
+            shouldHeal = true;
+            damageTimer -= 0.1f;
+
+            if (damageTimer >= 0)
+            {
+                DealDamage(0.1f);
+            }
+            else
+            {
+                shouldHeal = false;
+                Debug.Log("Stopped dealing damage");
+            }
+          
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && shouldHeal == true)
         {
-            RestoreHealth(1);
+            RestoreHealth(2);
         }
 	}
 
@@ -50,10 +77,15 @@ public class playerHealth : MonoBehaviour {
         Debug.Log("Dealing Damage");
         //Deal damage to the health bar
         currentHealth -= damageValue;
+        //Same as from start
         healthBar.value = CalculateHealth();
+
         //If the character is out of health, they die
         if (currentHealth <= 0)
-            Die();
+        {
+            Die("GameOver");
+        }
+            
     }
 
     void RestoreHealth(float healthGained)
@@ -76,9 +108,17 @@ public class playerHealth : MonoBehaviour {
         return currentHealth / maxHealth;
     }
 
-    void Die()
+    void Die(string gameOver)
     {
         currentHealth = 0;
+        levelToLoad = gameOver;
+        animator.SetTrigger("FadeOut");
         Debug.Log("Transition to game over scene, then reload");
+    }
+
+    //This function is called upon via Animation Events!
+    public void OnFadeComplete()
+    {
+        SceneManager.LoadScene(levelToLoad);
     }
 }
