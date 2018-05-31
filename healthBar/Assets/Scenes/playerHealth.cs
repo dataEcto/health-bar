@@ -12,6 +12,7 @@ public class playerHealth : MonoBehaviour {
     public float currentHealth { get; set; }
     public float maxHealth { get; set; }
     public Text healthBarText;
+    public Text timerText;
     public Animator animator;
     private string levelToLoad;
 
@@ -19,7 +20,6 @@ public class playerHealth : MonoBehaviour {
     /// In Game used Variables
     /// </summary>
     public Slider healthBar;
-
     public float timer = 10;
     public float damageTimer = 30;
     public bool shouldHeal = false;
@@ -35,8 +35,11 @@ public class playerHealth : MonoBehaviour {
         //Get the value of the slider 
         //set it to calculate health
         healthBar.value = CalculateHealth();
+
         healthBarText.text = "Health: " + currentHealth;
-        Debug.Log("Start");
+        timerText.text = "Start mashing in..." + timer;
+
+    
 
 	}
 	
@@ -47,14 +50,20 @@ public class playerHealth : MonoBehaviour {
         timer -= 1 * Time.deltaTime;
         healthBarText.text = "Health: " + Mathf.Round(currentHealth);
 
-        if (timer <= 0)
+ 
+        if (timer >= 0)
         {
+            timerText.text = "Start mashing in..." + Mathf.Round(timer);
+        }
+        else 
+        {
+            timerText.text = "Press Space to Restore Health!";
             shouldHeal = true;
             damageTimer -= 0.1f;
 
             if (damageTimer >= 0)
             {
-                DealDamage(0.1f);
+                DealDamage(0.5f);
             }
             else
             {
@@ -74,7 +83,7 @@ public class playerHealth : MonoBehaviour {
     void DealDamage(float damageValue)
     {
 
-        Debug.Log("Dealing Damage");
+
         //Deal damage to the health bar
         currentHealth -= damageValue;
         //Same as from start
@@ -90,6 +99,7 @@ public class playerHealth : MonoBehaviour {
 
     void RestoreHealth(float healthGained)
     {
+        Debug.Log("Healing");
         //Deal damage to the health bar
         currentHealth += healthGained;
         healthBar.value = CalculateHealth();
