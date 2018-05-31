@@ -32,3 +32,10 @@ Things I really need to do: 1) Code that makes dealing damage stop after a while
 
 I THINK what I can do is just make each difficulty level a new scene. Saves me time, I reckon.
 
+5/30/18
+Most of the changes are within my pushes, so I won't list them here.  I think I'll just write down what I'm going to need to implement. 
+I'll need some more levels of difficulty, and fix up those transitions and make it more consistent (which should be pretty easy to do though).
+I still need the aesthetic for the game. I'm not sure if I want to do the gritty tortue theme. Maybe a anti bullying kind of deal i dont  know. I can ask.
+
+This all reminds me of that Nintendo Tofu prototype...
+
