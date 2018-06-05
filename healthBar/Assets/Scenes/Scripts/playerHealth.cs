@@ -61,6 +61,8 @@ public class playerHealth : MonoBehaviour {
             shouldHeal = true;
             damageTimer -= 0.1f;
 
+            //Check if the Damage Timer is above 0.
+            //If not, stop dealing damage and disable the healing function
             if (damageTimer >= 0)
             {
                 DealDamage(0.5f);
@@ -70,13 +72,20 @@ public class playerHealth : MonoBehaviour {
                 shouldHeal = false;
                 Debug.Log("Stopped dealing damage");
             }
+
+            //Alternatively, if the player dies before the timer runs out, stop the healing function as well.
+            if (currentHealth <= 0)
+            {
+                shouldHeal = false;
+            }
           
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && shouldHeal == true)
         {
-            RestoreHealth(2);
+            RestoreHealth(3);
         }
+       
 	}
 
 
@@ -103,12 +112,14 @@ public class playerHealth : MonoBehaviour {
         //Deal damage to the health bar
         currentHealth += healthGained;
         healthBar.value = CalculateHealth();
-        //If the character is out of health, they die
+
+        //Prevent the player from restoring full health
         if (currentHealth >= maxHealth)
         {
             currentHealth -= 1;
             Debug.Log("Health has been restored to full");
         }
+        
            
     }
 
