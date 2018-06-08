@@ -3,27 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 
 public class playerHealth : MonoBehaviour {
-    /// <summary>
+
     /// Set Up Variables
-    /// </summary>
     public float currentHealth { get; set; }
     public float maxHealth { get; set; }
-    public Text healthBarText;
-    public Text timerText;
+    public TextMeshProUGUI healthBarText;
+    public TextMeshProUGUI timerText;
     public Animator animator;
     private string levelToLoad;
 
-    /// <summary>
     /// In Game used Variables
-    /// </summary>
     public Slider healthBar;
     public float timer = 10;
     public float damageTimer = 30;
     public bool shouldHeal = false;
-     
+
 	void Start ()
     {
         //can be any value of course
